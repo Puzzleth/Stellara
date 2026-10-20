@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090a0e" />
+    <meta
+      name="description"
+      content="Stellara is a short astronomy puzzle game. Match the telescope to the view from above."
+    />
+    <title>Stellara</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="app">
+      <section id="title">
+        <canvas id="title-sky" aria-hidden="true"></canvas>
+        <div class="title-shade"></div>
+        <div class="title-copy">
+          <p class="eyebrow">An observatory of puzzles</p>
+          <h1>Stellara</h1>
+          <p class="lede">
+            Look through the telescope, then pull back to the whole system. The sky and the map
+            disagree until you see how one makes the other.
+          </p>
+          <div id="level-list"></div>
+          <p class="fine">
+            Five nights for high-school astronomy. Orbits are circles on purpose. Switch views
+            freely — it runs in the browser, on a phone or a laptop.
+          </p>
+        </div>
+      </section>
+
+      <section id="play" hidden>
+        <header class="topbar">
+          <button id="back" type="button">All nights</button>
+          <div class="switch" role="tablist" aria-label="View">
+            <button id="tab-telescope" type="button" role="tab" aria-selected="true">Telescope</button>
+            <button id="tab-system" type="button" role="tab" aria-selected="false">System</button>
+          </div>
+          <div class="top-meta">
+            <span id="day-label">Day 0</span>
+            <button id="sound" type="button" aria-pressed="true">Sound</button>
+          </div>
+        </header>
+        <div class="workspace">
+          <div class="stage">
+            <canvas id="sky" aria-label="Telescope or system chart"></canvas>
+          </div>
+          <aside class="panel" id="panel"></aside>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
