@@ -6,48 +6,79 @@
     <meta name="theme-color" content="#090a0e" />
     <meta
       name="description"
-      content="Stellara is a short astronomy puzzle game. Match the telescope to the view from above."
+      content="Stellaras is a short astronomy puzzle game. Match the telescope to the view from above."
     />
-    <title>Stellara</title>
+    <title>Stellaras</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <div id="app">
-      <section id="title">
-        <canvas id="title-sky" aria-hidden="true"></canvas>
-        <div class="title-shade"></div>
-        <div class="title-copy">
-          <p class="eyebrow">An observatory of puzzles</p>
-          <h1>Stellara</h1>
+      <section id="home" class="shell">
+        <div class="sheet home-sheet">
+          <h1>Stellaras</h1>
           <p class="lede">
-            Look through the telescope, then pull back to the whole system. The sky and the map
-            disagree until you see how one makes the other.
+            An astronomy puzzle game in five nights. Look through the telescope, then pull back to
+            the whole system until the sky and the map agree.
           </p>
+          <h2 class="list-title">Nights</h2>
           <div id="level-list"></div>
+          <h2 class="list-title">Free play</h2>
+          <button type="button" class="sandbox-row" id="open-sandbox">
+            <span class="row-main">
+              <span class="row-title">Sandbox</span>
+              <span class="row-sub">Real gravity. Throw planets, rocks and stars into the inner Solar System.</span>
+            </span>
+            <span class="row-open">Open</span>
+          </button>
           <p class="fine">
-            Five nights for high-school astronomy. Orbits are circles on purpose. Switch views
-            freely — it runs in the browser, on a phone or a laptop.
+            Written for high-school astronomy. Orbits are circles on purpose. Works with a mouse or a
+            thumb. Music:
+            <a href="https://pixabay.com/music/ambient-space-590393/" target="_blank" rel="noopener">“Space” by Luceris</a>,
+            via Pixabay.
           </p>
+        </div>
+        <div class="well" id="home-well">
+          <p class="well-note" id="home-caption" aria-live="off"></p>
         </div>
       </section>
 
-      <section id="play" hidden>
+      <section id="play" class="shell" hidden>
         <header class="topbar">
-          <button id="back" type="button">All nights</button>
-          <div class="switch" role="tablist" aria-label="View">
+          <button id="back" class="back" type="button">All nights</button>
+          <p class="crumb">
+            <span id="crumb-title"></span>
+            <span id="crumb-concept" class="muted"></span>
+            <span id="crumb-pill" class="pill" hidden>Solved</span>
+          </p>
+          <div class="tabs" role="tablist" aria-label="View">
             <button id="tab-telescope" type="button" role="tab" aria-selected="true">Telescope</button>
             <button id="tab-system" type="button" role="tab" aria-selected="false">System</button>
           </div>
           <div class="top-meta">
-            <span id="day-label">Day 0</span>
-            <button id="sound" type="button" aria-pressed="true">Sound</button>
+            <span id="day-label" class="num">Day 0</span>
+            <button id="sound" type="button" aria-pressed="true">Sound on</button>
           </div>
         </header>
         <div class="workspace">
-          <div class="stage">
-            <canvas id="sky" aria-label="Telescope or system chart"></canvas>
+          <aside class="sheet panel" id="panel"></aside>
+          <div class="well" id="play-well" aria-label="Telescope or system view">
+            <svg id="strip" aria-hidden="true"></svg>
+            <p class="well-note" id="play-note"></p>
           </div>
-          <aside class="panel" id="panel"></aside>
+        </div>
+      </section>
+
+      <section id="sandbox" class="shell" hidden>
+        <header class="topbar">
+          <button id="sb-back" class="back" type="button">All nights</button>
+          <p class="crumb"><span class="crumb-title">Sandbox</span><span class="muted">Gravity between every body</span></p>
+          <div class="top-meta"><span id="sb-day-label" class="num">Day 0</span></div>
+        </header>
+        <div class="workspace">
+          <aside class="sheet panel" id="sb-panel"></aside>
+          <div class="well" id="sb-well" aria-label="Sandbox view of the inner Solar System">
+            <p class="well-note" id="sb-note"></p>
+          </div>
         </div>
       </section>
     </div>

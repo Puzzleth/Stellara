@@ -1,8 +1,52 @@
 let ctx: AudioContext | null = null
 let enabled = true
 
+/**
+ * “Space” by Luceris (https://pixabay.com/music/ambient-space-590393/), Pixabay Content License.
+ * Loops quietly under the game. Hosted on Vercel Blob so the repository never carries the file.
+ */
+const MUSIC_URL = 'https://fsurqovi1wa5n1pm.public.blob.vercel-storage.com/music/luceris-space-590393-CRJphmVADsCEHASrlDFPINnUcxCZ33.mp3'
+const MUSIC_VOLUME = 0.32
+let music: HTMLAudioElement | null = null
+let fade = 0
+
+function fadeMusic(to: number): void {
+  if (!music) return
+  const track = music
+  cancelAnimationFrame(fade)
+  const from = track.volume
+  const start = performance.now()
+  const tick = (now: number) => {
+    const t = Math.min(1, (now - start) / 1200)
+    track.volume = from + (to - from) * t
+    if (t < 1) fade = requestAnimationFrame(tick)
+    else if (to === 0) track.pause()
+  }
+  fade = requestAnimationFrame(tick)
+}
+
+/** Browsers only allow sound after a gesture, so the first click or key starts the music. */
+export function startMusic(): void {
+  if (!enabled) return
+  if (!music) {
+    music = new Audio(MUSIC_URL)
+    music.loop = true
+    music.preload = 'auto'
+    music.volume = 0
+  }
+  if (!music.paused) return
+  music.play().then(
+    () => fadeMusic(MUSIC_VOLUME),
+    () => {
+      // Blocked until a real gesture; the next one tries again.
+    },
+  )
+}
+
 export function setSound(on: boolean): void {
   enabled = on
+  if (on) startMusic()
+  else fadeMusic(0)
 }
 
 export function soundEnabled(): boolean {

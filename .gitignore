@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+
+# Music is served from Vercel Blob, never committed
+audio/
+public/audio/
+*.mp3
+
+# Blender source lives in the private Puzzleth/Stellaras-blender repo
+blender/
